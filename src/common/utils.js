@@ -26,7 +26,7 @@ export function copyToClipboard(textToCopy) {
 
 const ERROR_KEY = 'errorMessages';
 
-export const COLLECTION_NAME = 'my-buddy';
+export const COLLECTION_NAME = 'money';
 export const DOC_ID_TODO = 'todo';
 
 /**

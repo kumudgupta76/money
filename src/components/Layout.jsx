@@ -4,7 +4,7 @@ import { Layout, Breadcrumb, Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { getErrorCount, getErrors, isMobile } from '../common/utils';
 import { routes } from '../common/constants';
-import { UserContext } from '../common/UserContext';
+// import { UserContext } from '../common/UserContext';
 import { signOutUser } from '../common/authUtils';
 
 const { Header, Content, Footer } = Layout;
@@ -31,7 +31,7 @@ const Breadcrumbs = () => {
 const LayoutComponent = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   const showDrawer = () => {
     setDrawerVisible(true);
@@ -41,27 +41,27 @@ const LayoutComponent = () => {
     setDrawerVisible(false);
   };
 
-  let menuItems = routes.map(route => ({ key: route.key, label: <Link to={`/my-buddy/${route.slug}`}><div>{route.name}</div></Link> }));
+  let menuItems = routes.map(route => ({ key: route.key, label: <Link to={`/money/${route.slug}`}><div>{route.name}</div></Link> }));
 
-  if (user) {
-    menuItems.push({ key: 'sign-out', label: <Button type='link' onClick={signOutUser}>Sign Out</Button> });
-  } else {
-    menuItems.push({ key: 'sign-in', label: <Link to="/my-buddy/auth"><div>Sign In</div></Link> });
-  }
+  // if (user) {
+  //   menuItems.push({ key: 'sign-out', label: <Button type='link' onClick={signOutUser}>Sign Out</Button> });
+  // } else {
+  //   menuItems.push({ key: 'sign-in', label: <Link to="/money/auth"><div>Sign In</div></Link> });
+  // }
 
-  let menuItemsHor = routes.map(route => ({ key: route.key, label: <Link to={`/my-buddy/${route.slug}`}><div style={{ color: "white", fontSize: "large", fontWeight: "bold" }}>{route.name}</div></Link> }));
+  let menuItemsHor = routes.map(route => ({ key: route.key, label: <Link to={`/money/${route.slug}`}><div style={{ color: "white", fontSize: "large", fontWeight: "bold" }}>{route.name}</div></Link> }));
 
-  if (user) {
-    menuItemsHor.push({ key: 'sign-out', label: <Button type='link' style={{ color: "white", fontSize: "large", fontWeight: "bold" }} onClick={signOutUser}>Sign Out</Button> });
-  } else {
-    menuItemsHor.push({ key: 'sign-in', label: <Link to="/my-buddy/auth"><div style={{ color: "white", fontSize: "large", fontWeight: "bold" }}>Sign In</div></Link> });
-  }
+  // if (user) {
+  //   menuItemsHor.push({ key: 'sign-out', label: <Button type='link' style={{ color: "white", fontSize: "large", fontWeight: "bold" }} onClick={signOutUser}>Sign Out</Button> });
+  // } else {
+  //   menuItemsHor.push({ key: 'sign-in', label: <Link to="/money/auth"><div style={{ color: "white", fontSize: "large", fontWeight: "bold" }}>Sign In</div></Link> });
+  // }
 
   return (
     <Layout className="layout" style={{ minHeight: "100vh", height: "100vh" }}>
       {isMobile() ? <></> : <Header className="header">
         <div className="logo-container">
-          <Link to="my-buddy/">
+          <Link to="money/">
             <img src="icon.png" className="logo" alt="" />
           </Link>
           <Button

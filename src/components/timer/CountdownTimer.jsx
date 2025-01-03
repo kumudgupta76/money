@@ -70,7 +70,7 @@ const CountdownTimer = () => {
         console.log("Play Sound start", new Date().toISOString());
         const newData = [{ time: mins, completedAt: new Date().toLocaleString() }, ...data];
         setData(newData);
-        const audio = new Audio('/my-buddy/assets/simple-notification-152054.mp3'); // Path to your sound file
+        const audio = new Audio('/money/assets/simple-notification-152054.mp3'); // Path to your sound file
         audio.play().catch(error => {
             console.error('Error playing sound:', error);
         });
