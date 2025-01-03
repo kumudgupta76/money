@@ -11,7 +11,10 @@ import ExpenseTracker from './components/expense/ExpenseTracker';
 // import Todo from './components/todo/Todo';
 // import Battery from './components/battery/Battery';
 // import CalendarView from './components/calander/CalanderView';
-// import LocalStorageManager from './components/admin/LocalStorgeManager';
+import LocalStorageManager from './components/admin/LocalStorgeManager';
+import { Content, Footer, Header } from 'antd/lib/layout/layout';
+import { Layout } from 'antd';
+import { isMobile } from './common/utils';
 // import ProtectedRoute from './common/ProtectedRoute';
 // import { UserProvider } from './common/UserContext';
 // import AuthActions from './common/AuthActions';
@@ -62,8 +65,18 @@ const App = () => {
     //     </Routes>
     //   </Router>
     // </UserProvider>
-
+    // <Layout/>
+    <Layout className="layout" style={{ minHeight: "100vh", height: "100vh" }}>
+      {isMobile() ? <></> :<Header className="header" style={{color:"white"}}>My Expenses</Header>}
+    <Content className="content-div">
+        {/* <Breadcrumbs /> */}
+        <div className="site-layout-content">
     <ExpenseTracker></ExpenseTracker>
+    <LocalStorageManager></LocalStorageManager>
+    </div>
+      </Content>
+      <Footer className="footer"></Footer>
+    </Layout>
   );
 };
 

@@ -122,7 +122,7 @@ code {
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .content-div {
-    padding: 0 10px;
+    padding: 10px;
     overflow:auto
   }
   .expense-continer-div {
