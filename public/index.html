@@ -24,7 +24,7 @@
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
-        .register("sw-demo.js")
+        .register("sw-demo.js", {scope: "/money/"})
         .then(reg => {
           console.log("sw-demo registered.");
         })
