@@ -1,6 +1,6 @@
 {
-  "short_name": "MyBuddy",
-  "name": "Mobile Helper Application",
+  "short_name": "MyMoney",
+  "name": "Money Management App",
   "icons": [
     {
       "src": "icon.png",
@@ -23,6 +23,6 @@
   "start_url": "index.html",
   "background_color": "#011528",
   "display": "standalone",
-  "scope": "/",
+  "scope": "/money/",
   "theme_color": "#011528"
 }
