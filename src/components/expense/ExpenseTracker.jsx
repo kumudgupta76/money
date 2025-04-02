@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Table, Modal, message, Radio, DatePicker, Row, Col, Dropdown, Tooltip } from 'antd';
+import { Form, Input, Button, Table, Modal, message, Radio, DatePicker, Row, Col, Dropdown, Tooltip, Tag } from 'antd';
 import dayjs from 'dayjs';
-import { CopyOutlined, DatabaseOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
+import { CopyOutlined, DatabaseOutlined, PlusOutlined, SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { isMobile } from '../../common/utils';
 import './ExpenseTracker.css';
 
@@ -229,6 +229,16 @@ const ExpenseTracker = () => {
       key: 'action',
       render: (_, record) => (
         <>
+            <Button
+              onClick={() => {
+                const newExpense = { ...record, key: Date.now().toString() };
+                saveExpenses([newExpense, ...expenses]);
+                message.success('Expense duplicated successfully!');
+              }}
+              type="link"
+            >
+              Duplicate
+            </Button>
           <Button onClick={() => handleEditExpense(record)} type="link">
             Edit
           </Button>
@@ -424,7 +434,14 @@ const ExpenseTracker = () => {
             label="Description"
             rules={[{ required: true, message: 'Please enter the description' }]}
           >
-            <Input />
+            <Input
+              suffix={
+                <CloseCircleOutlined
+                  onClick={() => form.setFieldsValue({ description: '' })}
+                  style={{ cursor: 'pointer', color: '#999' }}
+                />
+              }
+            />
           </Form.Item>
           <Form.Item
             name="amount"
@@ -439,9 +456,11 @@ const ExpenseTracker = () => {
             rules={[{ required: true, message: 'Please select the payment mode' }]}
           >
             <Radio.Group className="tag-radio-group">
-              {expenseMode.map((expenseType, index) =>
-                <Radio.Button value={expenseType.value} key={index} className="tag-radio">{expenseType.text}</Radio.Button>
-              )}
+              {expenseMode.map((expenseType, index) => (
+                <Radio.Button value={expenseType.value} key={index} className="tag-radio">
+                  {expenseType.text}
+                </Radio.Button>
+              ))}
             </Radio.Group>
           </Form.Item>
           <Form.Item
@@ -452,6 +471,30 @@ const ExpenseTracker = () => {
           >
             <DatePicker style={{ width: '100%' }} />
           </Form.Item>
+          <div style={{ marginBottom: '16px' }}>
+            <span style={{ marginRight: 8 }}>Quick Select:</span>
+            <Tag
+              onClick={() => form.setFieldsValue({ date: dayjs().subtract(1, 'day') })}
+              style={{ cursor: 'pointer' }}
+            >
+              Yesterday
+            </Tag>
+            <Tag
+              onClick={() => form.setFieldsValue({ date: dayjs().subtract(2, 'day') })}
+              style={{ cursor: 'pointer' }}
+            >
+              Day Before Yesterday
+            </Tag>
+            {[...Array(5).keys()].map((i) => (
+              <Tag
+                key={i}
+                onClick={() => form.setFieldsValue({ date: dayjs().subtract(i + 3, 'day') })}
+                style={{ cursor: 'pointer' }}
+              >
+                {dayjs().subtract(i + 3, 'day').format('YYYY-MM-DD')}
+              </Tag>
+            ))}
+          </div>
           <Form.Item
             name="comment"
             label="Comment"
